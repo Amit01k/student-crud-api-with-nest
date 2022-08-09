@@ -19,7 +19,7 @@ export class StudentController {
   }
 
   @Get(':index')
-  getSpecificStudent(@Param() index) {
+  getSpecificStudent(@Param('index') index) {
     return this.studentService.getSpecificStudent(index);
   }
 
@@ -28,13 +28,17 @@ export class StudentController {
     return this.studentService.createStudent(student);
   }
 
-  @Delete(':id')
-  deleteStudent(@Param() id) {
+  @Delete('del/:id')
+  deleteStudent(@Param() id: any) {
     return this.studentService.deleteStudent(id);
   }
-
   @Patch(':id')
-  updateStudent(@Param() id, @Body() student) {
-    return this.studentService.updateStudent(id, student);
+  updateStudent(@Param('id') id: any, @Body() student: StudentService) {
+    return this.studentService.updateStudent(+id, student);
   }
+
+  // @Patch(':id')
+  // updateStudent(@Param("id") id:any, @Body() studentService:StudentService) {
+  //   return this.studentService.updateStudent(+id, studentService);
+  // }
 }
